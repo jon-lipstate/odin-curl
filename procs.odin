@@ -121,7 +121,8 @@ when ODIN_OS == .Linux || ODIN_OS == .Darwin {
 	@(init)
 	init_dll :: proc() {
 		ok: bool
-		CURL_DLL, ok = dynlib.load_library("./libcurl-x64.dll");assert(ok) // todo: allow cfg path?
+		CURL_DLL, ok = dynlib.load_library("./libcurl-x64.dll")
+		assert(ok, "libcurl-x64.dll must be in same directory as the executable.") // todo: allow cfg path?
 		//curl.h
 		formadd = auto_cast dynlib.symbol_address(CURL_DLL, "curl_formadd")
 		formget = auto_cast dynlib.symbol_address(CURL_DLL, "curl_formget")
